@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Peticiones</title>
+    <title>Servicios</title>
     <link rel="stylesheet" href="css/index.css" />
   </head>
   <body>
@@ -18,7 +18,7 @@
           </svg>
         </label>
         <ul class="links">
-        <li><a href="index.php">Inicio</a></li>
+          <li><a href="index.php">Inicio</a></li>
           <li><a href="sobr_no.php">Sobre Nosotros</a></li>
           <li><a href="servi.php">Servicios</a></li>
         </ul>
@@ -30,9 +30,9 @@
     </header>
     <section class="hero-section">
       <div class="hero">
-        <h2>Peticiones</h2>
+        <h2>Sobre Nosotros</h2>
         <p>
-        La Página de Peticiones es una plataforma centralizada donde los usuarios pueden crear, gestionar y visualizar peticiones de manera eficiente. Esta página está diseñada para ofrecer una experiencia de usuario intuitiva y fácil de usar, permitiendo a los empleados de la organización realizar solicitudes de diferentes tipos, como solicitudes de recursos, reportes de incidencias, o solicitudes de soporte técnico.
+        En PetiFácil, nos especializamos en simplificar la gestión de peticiones. Nos comprometemos a ofrecer soluciones eficientes para empresas de todos los tamaños. Nuestro equipo está dedicado a proporcionar herramientas y servicios que permitan organizar, responder y dar seguimiento a las solicitudes de manera rápida y sencilla. En PetiFácil, valoramos la simplicidad y la satisfacción del cliente. Confía en nosotros para simplificar tus procesos de gestión de peticiones y llevar tu empresa al siguiente nivel.
         </p>
         <div class="buttons">
           <a href="inicio.php" class="join">Realizar Petición</a>

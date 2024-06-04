@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Peticiones</title>
+    <title>Servicios</title>
     <link rel="stylesheet" href="css/index.css" />
   </head>
   <body>
@@ -18,7 +18,7 @@
           </svg>
         </label>
         <ul class="links">
-        <li><a href="index.php">Inicio</a></li>
+          <li><a href="index.php">Inicio</a></li>
           <li><a href="sobr_no.php">Sobre Nosotros</a></li>
           <li><a href="servi.php">Servicios</a></li>
         </ul>
@@ -30,9 +30,9 @@
     </header>
     <section class="hero-section">
       <div class="hero">
-        <h2>Peticiones</h2>
+        <h2>Nuestros Servicios</h2>
         <p>
-        La Página de Peticiones es una plataforma centralizada donde los usuarios pueden crear, gestionar y visualizar peticiones de manera eficiente. Esta página está diseñada para ofrecer una experiencia de usuario intuitiva y fácil de usar, permitiendo a los empleados de la organización realizar solicitudes de diferentes tipos, como solicitudes de recursos, reportes de incidencias, o solicitudes de soporte técnico.
+        Ofrecemos soluciones especializadas para gestionar eficientemente las solicitudes de tus clientes, incluyendo sistemas de gestión de peticiones para organizar y responder rápidamente, soporte técnico personalizado para garantizar el funcionamiento sin problemas de tus sistemas, desarrollo de plataformas intuitivas de atención al cliente, análisis de datos para identificar áreas de mejora y consultoría especializada para seleccionar las mejores herramientas y procesos. Nuestros servicios están diseñados para ayudarte a ofrecer una experiencia excepcional a tus clientes mientras optimizas la eficiencia de tu negocio.
         </p>
         <div class="buttons">
           <a href="inicio.php" class="join">Realizar Petición</a>
