@@ -6,18 +6,18 @@ session_start();
 
 if (isset($_POST["inicio"])) {
 
-    $cedula = $_POST["cedula"];
+    $documento = $_POST["documento"];
     
     $contrasena = htmlentities(addslashes($_POST['contrasena']));
 
-    $sql = $con->prepare("SELECT*FROM usuarios where cedula = '$cedula'");
+    $sql = $con->prepare("SELECT * FROM usuarios where documento = '$documento'");
     $sql->execute();
     $fila = $sql->fetch();
 
 
     if(gettype($fila) == "array" && password_verify($contrasena, $fila['contrasena'])){
 
-        $_SESSION['cedula'] = $fila['cedula'];
+        $_SESSION['documento'] = $fila['documento'];
         $_SESSION['id_tip_user'] = $fila ['id_tip_user'];
         echo "contraseña:",$contrasena;
 
@@ -27,7 +27,7 @@ if (isset($_POST["inicio"])) {
         }
         
      else if ($_SESSION['id_tip_user'] == 2) {
-         header ("Location: ../model/usuario/empleado.php");
+         header ("Location: ../model/usuario/index.php");
          exit();
          } 
    

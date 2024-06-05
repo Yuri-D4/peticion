@@ -82,7 +82,7 @@
                       <label for="yourUsername" class="form-label">Cedula</label>
                       <div class="input-group has-validation">
                         <!-- <span class="input-group-text" id="inputGroupPrepend">@</span> -->
-                        <input type="number" name="cedula" class="form-control" id="cedula" required>
+                        <input type="number" name="documento" class="form-control" id="cedula" required>
                         <div class="invalid-feedback">Por favor ingrese su usuario</div>
                       </div>
                     </div>

@@ -8,7 +8,7 @@
 
    if (isset($_POST['registrar']))
    {
-     $cedula= $_POST['cedula'];
+    $documento= $_POST['documento'];
     $nombre= $_POST['nombre'];
     $apellido= $_POST['apellido'];
     // $celular= $_POST['celular'];
@@ -18,7 +18,7 @@
     // $id_estado= 1;
     
 
-     $sql= $con -> prepare ("SELECT * FROM usuarios WHERE cedula='$cedula'");
+     $sql= $con -> prepare ("SELECT * FROM usuarios WHERE documento='$documento'");
      $sql -> execute();
      $fila = $sql -> fetchAll(PDO::FETCH_ASSOC);
 
@@ -29,7 +29,7 @@
 
      else
    
-     if ($cedula=="" || $nombre=="" || $correo==""  || $contrasena=="" || $tipo_user=="")
+     if ($documento=="" || $nombre=="" || $correo==""  || $contrasena=="" || $tipo_user=="")
       {
          echo '<script>alert ("EXISTEN DATOS VACIOS");</script>';
    
@@ -39,7 +39,7 @@
 
         $pass_cifrado = password_hash($contrasena,PASSWORD_DEFAULT, array("pass"=>12));
         
-        $insertSQL = $con->prepare("INSERT INTO usuarios(cedula, nombre, apellido, correo, contrasena, id_tip_user) VALUES($cedula, '$nombre', '$apellido','$correo','$pass_cifrado', '$tipo_user')");
+        $insertSQL = $con->prepare("INSERT INTO usuarios(documento, nombre, apellido, correo, contrasena, id_tip_user) VALUES($documento, '$nombre', '$apellido','$correo','$pass_cifrado', '$tipo_user')");
         $insertSQL -> execute();
         echo '<script> alert("REGISTRO EXITOSO");</script>';
         echo '<script>window.location="inicio.php"</script>';
@@ -123,7 +123,7 @@
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Cedula</label>
                       <div class="input-group has-validation">
-                        <input type="text" name="cedula" class="form-control" pattern="[0-9]{5,15}" title="solo se aceptan números" id="cedula" >
+                        <input type="text" name="documento" class="form-control" pattern="[0-9]{5,15}" title="solo se aceptan números" id="cedula" >
                         <div class="invalid-feedback">Por favor, ingrese su cedula, recuerde que solo se aceptan números.</div>
                       </div>
                     </div>
