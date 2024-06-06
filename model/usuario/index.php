@@ -40,6 +40,7 @@
                         <th>Fecha</th>
                         <th>Descripción</th>
                         <th>Estado</th>
+                        <th>Actualizar</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -62,6 +63,11 @@
                                 <td><?php echo $fila['fecha']; ?></td>
                                 <td><?php echo $fila['descripcion']; ?></td>
                                 <td><?php echo $fila['nom_estado']; ?></td>
+                                <td>
+                                  <a href="#" class="boton" onclick="window.open('actualizar/soli.php?id=<?php echo $fila['id_soli']; ?>','','width=800,height=400,toolbar=NO');void(null);">
+                                    <i class="fa fa-repeat"></i>
+                                  </a>
+                        </td>
 
                         </tr>
                         <?php

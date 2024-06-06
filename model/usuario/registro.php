@@ -10,20 +10,26 @@
   $documento= $_SESSION['documento'];
   include 'plant.php';
 
-  
+  function solicitud() {
+    // Código de la función aquí
+}
   if (isset($_POST['enviar']))
    {
-       $tipo_nuevo= $_POST['tipo'];
+       
+    $id_tip_soli= $_POST['tipo_s'];
+    $tipo_nuevo= $_POST['tipo'];
 
-       $insertSQL = $con->prepare("INSERT INTO tipo_solicitud(tipo_soli) VALUES('$tipo_nuevo')");
-        $insertSQL -> execute();
+   if($id_tip_soli="" AND $tipo_nuevo !=""){
+    $insertSQL = $con->prepare("INSERT INTO tipo_solicitud(tipo_soli) 
+    VALUES ('$id_tip_soli')");
+    $insertSQL -> execute ();
+   }
 
-       $id_tip_soli= $_POST['tipo_s'];
-        $descripcion= $_POST['descripcion'];
-        $fecha= date('Y-m-d');
-        $id_estado = 2;
+   else if ($tipo_nuevo="" AND $id_tip_soli !=""){
+
+   }
     
-     $sql= $con -> prepare ("SELECT * FROM solicitudes WHERE documento = $documento AND id_tip_soli = $id_tip_soli AND id_estado = $id_estado");
+     $sql= $con -> prepare ("SELECT * FROM solicitudes WHERE documento = $documento AND id_tip_soli = $id_tip_soli AND id_estado = 2");
      $sql -> execute();
      $fila = $sql -> fetchAll(PDO::FETCH_ASSOC);
 
@@ -96,14 +102,14 @@
                 <div class="col-12">
                   <div class="form-floating">
                       <label for="floatingTextarea">Otro(opcional)</label>
-                    <textarea class="form-control" placeholder="Tipo de solicitud" name="tipo" style="height: 100px;"></textarea>
+                    <input class="form-control" placeholder="Tipo de solicitud" name="tipo">
                   </div>
                 </div>
 
                 <div class="col-12">
                   <div class="form-floating">
                       <label for="floatingTextarea">Descripcion</label>
-                    <textarea class="form-control" placeholder="descripcion" name="descripcion" id="descripcion" style="height: 100px;"></textarea>
+                    <input class="form-control" placeholder="descripcion" name="descripcion" id="descripcion">
                   </div>
                 </div>
             

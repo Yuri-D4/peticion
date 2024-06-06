@@ -152,7 +152,7 @@
               <li><a href="total_soli.php"><i class="fa fa-minus-square-o"></i> Todas</a></li>
               </ul>
             </li>
-            <li><a href="registro.php"><i class="fa fa-pencil-square-o"></i> Realizar Peticion</a></li>
+            <!-- <li><a href="registro.php"><i class="fa fa-pencil-square-o"></i> Realizar Peticion</a></li> -->
             <li>
               <form method="POST">
                 <a href="../../index.php"><i class="fa fa-sign-out"></i> 

@@ -1,15 +1,13 @@
 <?php
 
      session_start();
-     require_once("../../db/connection.php");
+     require_once("../../../db/connection.php");
      //include("../../../controller/validarSesion.php");
      $db = new Database();
      $con = $db -> conectar();
 
    
   $documento= $_SESSION['documento'];
-  include 'plant.php';
- 
 
    //empieza la consulta
   
@@ -57,7 +55,45 @@
  
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+    <script>
+        function centrar() {
+            iz=(screen.width-document.body.clientWidth)/2;
+            de=(screen.height-document.body.clientHeight)/3;
+            moveTo(iz,de);
+        }
+    </script>
+  <head>
+    <meta charset="UTF-8">
+    <title>Bienvenido</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <!-- Bootstrap 3.3.2 -->
+    <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />    
+    <!-- FontAwesome 4.3.0 -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <!-- Ionicons 2.0.0 -->
+    <link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />    
+    <!-- Theme style -->
+    <link href="../../dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+    <!-- AdminLTE Skins. Choose a skin from the css/skins 
+         folder instead of downloading all of them to reduce the load. -->
+    <link href="../../dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+    <!-- iCheck -->
+    <link href="../../plugins/iCheck/flat/blue.css" rel="stylesheet" type="text/css" />
+    <!-- Morris chart -->
+    <link href="../../plugins/morris/morris.css" rel="stylesheet" type="text/css" />
+    <!-- jvectormap -->
+    <link href="../../plugins/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+    <!-- Date Picker -->
+    <link href="../../plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
+    <!-- Daterange picker -->
+    <link href="../../plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link href="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
+
   <!-- general form elements -->
+  <body onload="centrar();">
   <div class="box box-primary">
                 <div class="box-header">
                   <h3 class="box-title">Actualizar Petición</h3>
@@ -67,7 +103,7 @@
                   <div class="box-body">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Documento</label>
-                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="documento">
+                      <p><b><?php echo $documento ?></b></p>
                     </div>
 
                     <div class="form-group">
@@ -96,8 +132,10 @@
                   </div><!-- /.box-body -->
 
                   <div class="box-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" name="actualizar" class="btn btn-primary">Actulizar</button>
                   </div>
                 </form>
               </div><!-- /.box -->
+
+</body>
    

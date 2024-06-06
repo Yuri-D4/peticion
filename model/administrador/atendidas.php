@@ -45,12 +45,7 @@
                     <tbody>
                     <?php
                         
-                        $result = $con->prepare ("SELECT solicitudes.id_soli, solicitudes.documento, tipo_solicitud.tipo_soli, solicitudes.fecha, solicitudes.descripcion, estado.nom_estado
-                        FROM solicitudes
-                        INNER JOIN tipo_solicitud ON tipo_solicitud.id_tip_soli = solicitudes.id_tip_soli
-                        INNER JOIN estado ON estado.id_estado = solicitudes.id_estado 
-                        WHERE  solicitudes.id_estado = 1
-                        ORDER BY solicitudes.fecha DESC");
+                        $result = $con->prepare ("SELECT solicitudes.id_soli, solicitudes.documento, tipo_solicitud.tipo_soli, solicitudes.fecha, solicitudes.descripcion, estado.nom_estado, usuarios.documento, usuarios.nombre, usuarios.apellido, usuarios.correo FROM solicitudes INNER JOIN tipo_solicitud ON tipo_solicitud.id_tip_soli = solicitudes.id_tip_soli INNER JOIN estado ON estado.id_estado = solicitudes.id_estado INNER JOIN usuarios ON usuarios.documento = solicitudes.documento WHERE solicitudes.id_estado = 1 ORDER BY solicitudes.fecha DESC");
                         $result->execute();
                         $result = $result->fetchAll();
                         foreach ($result as $fila) {
