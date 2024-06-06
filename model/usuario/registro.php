@@ -29,7 +29,7 @@
 
      if ($fila){
         echo '<script>alert ("DOCUMENTO YA EXISTE //CAMBIELO//");</script>';
-        echo '<script>window.location="registrope.php"</script>';
+        echo '<script>window.location="registro.php"</script>';
      }
 
      else
@@ -37,7 +37,7 @@
      if ($id_tip_soli=="" || $descripcion=="")
       {
          echo '<script>alert ("EXISTEN DATOS VACIOS");</script>';
-         echo '<script>window.location="registrope.php"</script>';
+         echo '<script>window.location="registro.php"</script>';
       }
       
       else{
@@ -45,7 +45,7 @@
         $insertSQL = $con->prepare("INSERT INTO solicitudes (documento, id_tip_soli, fecha, descripcion, id_estado) VALUES($documento, '$id_tip_soli', '$fecha','$descripcion','$id_estado')");
         $insertSQL -> execute();
         echo '<script> alert("REGISTRO EXITOSO");</script>';
-        echo '<script>window.location="registrope.php"</script>';
+        echo '<script>window.location="registro.php"</script>';
      }  
     }
  
