@@ -10,54 +10,54 @@
   $documento= $_SESSION['documento'];
   include 'plant.php';
 
-  function solicitud() {
-    // Código de la función aquí
-}
-  if (isset($_POST['enviar']))
-   {
-       
-    $id_tip_soli= $_POST['tipo_s'];
-    $tipo_nuevo= $_POST['tipo'];
 
-   if($id_tip_soli="" AND $tipo_nuevo !=""){
-    $insertSQL = $con->prepare("INSERT INTO tipo_solicitud(tipo_soli) 
-    VALUES ('$id_tip_soli')");
-    $insertSQL -> execute ();
-   }
-
-   else if ($tipo_nuevo="" AND $id_tip_soli !=""){
-
-   }
-    
-     $sql= $con -> prepare ("SELECT * FROM solicitudes WHERE documento = $documento AND id_tip_soli = $id_tip_soli AND id_estado = 2");
-     $sql -> execute();
-     $fila = $sql -> fetchAll(PDO::FETCH_ASSOC);
-
-     if ($fila){
-        echo '<script>alert ("DOCUMENTO YA EXISTE //CAMBIELO//");</script>';
-        echo '<script>window.location="registro.php"</script>';
-     }
-
-     else
-   
-     if ($id_tip_soli=="" || $descripcion=="")
-      {
-         echo '<script>alert ("EXISTEN DATOS VACIOS");</script>';
-         echo '<script>window.location="registro.php"</script>';
+  function solicitud($con, $documento, $id_tip_soli, $fecha, $descripcion, $id_estado)
+  {
+      $sql = $con->prepare("SELECT * FROM solicitudes WHERE documento = :documento AND id_tip_soli = :id_tip_soli AND id_estado = :id_estado");
+      $sql->bindParam(':documento', $documento);
+      $sql->bindParam(':id_tip_soli', $id_tip_soli);
+      $sql->bindParam(':id_estado', $id_estado);
+      $sql->execute();
+      $fila = $sql->fetch(PDO::FETCH_ASSOC);
+  
+      if ($fila) {
+          echo '<script>alert("DOCUMENTO YA EXISTE //CAMBIELO//");</script>';
+          echo '<script>window.location="registro.php"</script>';
+      } else if (empty($id_tip_soli) || empty($descripcion)) {
+          echo '<script>alert("EXISTEN DATOS VACIOS");</script>';
+          echo '<script>window.location="registro.php"</script>';
+      } else {
+          $insertSQL = $con->prepare("INSERT INTO solicitudes (documento, id_tip_soli, fecha, descripcion, id_estado) VALUES(:documento, :id_tip_soli, :fecha, :descripcion, :id_estado)");
+          $insertSQL->bindParam(':documento', $documento);
+          $insertSQL->bindParam(':id_tip_soli', $id_tip_soli);
+          $insertSQL->bindParam(':fecha', $fecha);
+          $insertSQL->bindParam(':descripcion', $descripcion);
+          $insertSQL->bindParam(':id_estado', $id_estado);
+          $insertSQL->execute();
+          echo '<script>alert("REGISTRO EXITOSO");</script>';
+          echo '<script>window.location="registro.php"</script>';
       }
-      
-      else{
-        
-        $insertSQL = $con->prepare("INSERT INTO solicitudes (documento, id_tip_soli, fecha, descripcion, id_estado) VALUES($documento, '$id_tip_soli', '$fecha','$descripcion','$id_estado')");
-        $insertSQL -> execute();
-        echo '<script> alert("REGISTRO EXITOSO");</script>';
-        echo '<script>window.location="registro.php"</script>';
-     }  
-    }
- 
- 
-?>
-
+  }
+  
+  if (isset($_POST['enviar'])) {
+      $id_tip_soli = $_POST['tipo_s'];
+      $tipo_nuevo = $_POST['tipo'];
+      $descripcion = $_POST['descripcion'];
+      $fecha = date("Y-m-d");
+      $id_estado = 2;
+  
+      if (empty($id_tip_soli) && !empty($tipo_nuevo)) {
+          $insertSQL = $con->prepare("INSERT INTO tipo_solicitud (tipo_soli) VALUES (:tipo_soli)");
+          $insertSQL->bindParam(':tipo_soli', $tipo_nuevo);
+          $insertSQL->execute();
+          echo '<script>alert("Registra tipo");</script>';
+          solicitud($con, $documento, $id_tip_soli, $fecha, $descripcion, $id_estado);
+      } else if (!empty($id_tip_soli) && empty($tipo_nuevo)) {
+          solicitud($con, $documento, $id_tip_soli, $fecha, $descripcion, $id_estado);
+      }
+  }
+  ?>
+  
 <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -105,7 +105,7 @@
                     <input class="form-control" placeholder="Tipo de solicitud" name="tipo">
                   </div>
                 </div>
-
+                
                 <div class="col-12">
                   <div class="form-floating">
                       <label for="floatingTextarea">Descripcion</label>
@@ -115,7 +115,7 @@
             
                
                 <div class="text-center">
-                  <button  name="enviar" class="btn btn-primary">Enviar</button>
+                  <input  name="enviar" class="btn btn-primary" value="Enviar" type="submit">
                 </div>
               </form><!-- End floating Labels Form -->
 

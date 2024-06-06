@@ -21,7 +21,7 @@
         $sql = $con -> prepare(" SELECT * FROM solicitudes WHERE id_soli='".$_GET['id']."'");
         $insertSQL -> execute();
 
-       $id_tip_soli= $_POST['tipo_s'];
+       $id_tip_soli= $_POST['tipo_soli'];
         $descripcion= $_POST['descripcion'];
         $fecha= date('Y-m-d');
         $id_estado = 2;
@@ -64,7 +64,7 @@
             moveTo(iz,de);
         }
     </script>
-  <head>
+  <html>
     <meta charset="UTF-8">
     <title>Bienvenido</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
@@ -94,48 +94,38 @@
 
   <!-- general form elements -->
   <body onload="centrar();">
-  <div class="box box-primary">
-                <div class="box-header">
-                  <h3 class="box-title">Actualizar Petición</h3>
-                </div><!-- /.box-header -->
-                <!-- form start -->
-                <form role="form">
-                  <div class="box-body">
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Documento</label>
-                      <p><b><?php echo $documento ?></b></p>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Tipo Solicitud</label>
-                      <select class="form-control">
-                      <option value="">Seleccione</option>
-                      <?php   
-
-                            $query = $con -> prepare("SELECT * FROM tipo_solicitud");
-                            $query -> execute ();
-
-                            while ($fila = $query -> fetch(PDO::FETCH_ASSOC)){
-
-                                echo "<option value=" . $fila['id_tip_soli'] . ">" . $fila['tipo_soli'] . "</option>";
-                            }
-
-                            ?>
-                      </select>
-                    </div>
-
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Descripción</label>
-                      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Descripción">
-                    </div>
-                    
-                  </div><!-- /.box-body -->
-
-                  <div class="box-footer">
-                    <button type="submit" name="actualizar" class="btn btn-primary">Actulizar</button>
-                  </div>
-                </form>
-              </div><!-- /.box -->
-
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">Actualizar Petición</h3>
+        </div>
+        <form role="form" method="POST" action="actualizar">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Documento</label>
+                    <p><b><?php echo $documento ?></b></p>
+                </div>
+                <div class="form-group">
+                    <label>Tipo Solicitud</label>
+                    <select class="form-control" name="tipo_soli">
+                        <option value="">Seleccione</option>
+                        <?php   
+                        $query = $con->prepare("SELECT * FROM tipo_solicitud");
+                        $query->execute();
+                        while ($fila = $query->fetch(PDO::FETCH_ASSOC)) {
+                            echo "<option value=" . $fila['id_tip_soli'] . ">" . $fila['tipo_soli'] . "</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Descripción</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Descripción" name="descripcion">
+                </div>
+            </div>
+            <div class="box-footer">
+                <button type="submit" name="actualizar" class="btn btn-primary">Actualizar</button>
+            </div>
+        </form>
+    </div>
 </body>
-   
+</html>
