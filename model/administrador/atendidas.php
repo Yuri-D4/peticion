@@ -49,7 +49,7 @@
                         FROM solicitudes
                         INNER JOIN tipo_solicitud ON tipo_solicitud.id_tip_soli = solicitudes.id_tip_soli
                         INNER JOIN estado ON estado.id_estado = solicitudes.id_estado 
-                        WHERE solicitudes.documento = $documento AND solicitudes.id_estado = 1
+                        WHERE  solicitudes.id_estado = 1
                         ORDER BY solicitudes.fecha DESC");
                         $result->execute();
                         $result = $result->fetchAll();

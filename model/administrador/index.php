@@ -29,7 +29,7 @@
           <!-- Small boxes (Stat box) -->
         <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">Respondidas</h3>
+                  <h3 class="box-title">No respondidas</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table id="example1" class="table table-bordered table-striped">
@@ -40,6 +40,7 @@
                         <th>Fecha</th>
                         <th>Descripción</th>
                         <th>Estado</th>
+                        <th>Atender</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -49,7 +50,7 @@
                         FROM solicitudes
                         INNER JOIN tipo_solicitud ON tipo_solicitud.id_tip_soli = solicitudes.id_tip_soli
                         INNER JOIN estado ON estado.id_estado = solicitudes.id_estado 
-                        WHERE solicitudes.documento = $documento AND solicitudes.id_estado = 1
+                        WHERE  solicitudes.id_estado = 2
                         ORDER BY solicitudes.fecha DESC");
                         $result->execute();
                         $result = $result->fetchAll();
@@ -62,6 +63,11 @@
                                 <td><?php echo $fila['fecha']; ?></td>
                                 <td><?php echo $fila['descripcion']; ?></td>
                                 <td><?php echo $fila['nom_estado']; ?></td>
+                                <td>
+                                  <a href="#" class="boton" onclick="window.open('../respuesta/respon.php?id=<?php echo $fila['id_soli']; ?>','','width=800,height=750,toolbar=NO');void(null);">
+                                    <i class="fa  fa-reply"></i>
+                                  </a>
+                        </td>
 
                         </tr>
                         <?php
@@ -78,5 +84,4 @@
 
 <?php
   include 'footer.php';
- 
 ?>
