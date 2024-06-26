@@ -44,6 +44,8 @@
                     <thead>
                       <tr>
                         <th>Cedula</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
                         <th>Tipo de Solicitud</th>
                         <th>Fecha</th>
                         <th>Descripción</th>
@@ -63,6 +65,8 @@
                         
                         <tr>
                                 <td><?php echo $fila['documento']; ?></td>
+                                <td><?php echo $fila['nombre']; ?></td>
+                                <td><?php echo $fila['apellido']; ?></td>
                                 <td><?php echo $fila['tipo_soli']; ?></td>
                                 <td><?php echo $fila['fecha']; ?></td>
                                 <td><?php echo $fila['descripcion']; ?></td>
