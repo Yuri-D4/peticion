@@ -7,7 +7,7 @@ $con = $db->conectar();
 
 $documento= $_SESSION['documento'];
      if (!isset($_SESSION['documento'])) {
-       header("Location: ../../index.php");
+       header("Location: ../../../index.php");
        exit;
      }
 
