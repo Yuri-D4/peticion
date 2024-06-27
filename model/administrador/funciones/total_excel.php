@@ -29,7 +29,7 @@ if (isset($_POST['total_excel'])) { // Asegúrate de usar el nombre correcto de 
                             INNER JOIN tipo_solicitud ON tipo_solicitud.id_tip_soli = solicitudes.id_tip_soli 
                             INNER JOIN estado ON estado.id_estado = solicitudes.id_estado 
                             INNER JOIN usuarios ON usuarios.documento = solicitudes.documento 
-                            ORDER BY solicitudes.fecha DESC");
+                            ORDER BY solicitudes.documento");
     $result->execute();
     $data = $result->fetchAll(PDO::FETCH_ASSOC);
 
