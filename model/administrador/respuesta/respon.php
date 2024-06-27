@@ -5,58 +5,51 @@ require_once("../../../db/connection.php");
 $db = new Database();
 $con = $db->conectar();
 
+$documento= $_SESSION['documento'];
+     if (!isset($_SESSION['documento'])) {
+       header("Location: ../../../index.php");
+       exit;
+     }
+
+$identificador = $_GET['id'];
+
 // Obtener la solicitud actual
-$sql = $con->prepare("SELECT solicitudes.*, tipo_solicitud.tipo_soli, estado.nom_estado, usuarios.nombre, usuarios.apellido 
+$sql = $con->prepare("SELECT solicitudes.*, tipo_solicitud.tipo_soli, usuarios.nombre, usuarios.apellido 
                       FROM solicitudes 
                       INNER JOIN tipo_solicitud ON solicitudes.id_tip_soli = tipo_solicitud.id_tip_soli 
-                      INNER JOIN estado ON solicitudes.id_estado = estado.id_estado
                       INNER JOIN usuarios ON solicitudes.documento = usuarios.documento
-                      WHERE id_soli = :id");
-$sql->bindParam(':id', $_GET['id']);
+                      WHERE solicitudes.id_soli = $identificador");
 $sql->execute();
-$fila = $sql->fetch(PDO::FETCH_ASSOC);
+$fila = $sql->fetch();
 
 $documento = $fila['documento'];
-$descripcion = $fila['descripcion'];
-$tipo_soli = $fila['tipo_soli'];
-$id_tip_soli = $fila['id_tip_soli']; // Agregado para mantener el valor
-$id_estado = $fila['id_estado'];
 $nombre = $fila['nombre'];
 $apellido = $fila['apellido'];
+$descripcion = $fila['descripcion'];
+$tipo_soli = $fila['tipo_soli'];
+$id_tip_soli = $fila['id_tip_soli'];
+$id_estado = 1;
 
 // Declaración de variables de campos en la tabla
 if (isset($_POST['responder'])) {
-    $id_tip_soli = isset($_POST['tipo_s']) ? $_POST['tipo_s'] : $id_tip_soli; // Mantener el valor actual si no se envía uno nuevo
-    $descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : $descripcion;
-    $estado = isset($_POST['estado']) ? $_POST['estado'] : $id_estado;
-    $fecha = date('Y-m-d');
 
-    // Verificar si la solicitud ya existe
-    $sql = $con->prepare("SELECT * FROM solicitudes WHERE documento = :documento AND id_tip_soli = :id_tip_soli AND id_estado = :id_estado AND id_soli != :id");
-    $sql->bindParam(':documento', $documento);
-    $sql->bindParam(':id_tip_soli', $id_tip_soli);
-    $sql->bindParam(':id_estado', $estado);
-    $sql->bindParam(':id', $_GET['id']);
-    $sql->execute();
-    $fila = $sql->fetchAll(PDO::FETCH_ASSOC);
+    $respuesta=$_POST['respuesta'];
 
-    if ($fila) {
-        echo '<script>alert("DOCUMENTO YA EXISTE //CAMBIELO//");</script>';
-        echo '<script>window.location="soli.php"</script>';
-    } else if (empty($estado)) {
-        echo '<script>alert("EXISTEN DATOS VACIOS");</script>';
-        echo '<script>window.location="soli.php"</script>';
-    } else {
-        // Actualizar la solicitud
-        $updateSQL = $con->prepare("UPDATE solicitudes SET id_tip_soli = :id_tip_soli, fecha = :fecha, descripcion = :descripcion, id_estado = :id_estado WHERE id_soli = :id");
-        $updateSQL->bindParam(':id_tip_soli', $id_tip_soli);
-        $updateSQL->bindParam(':fecha', $fecha);
-        $updateSQL->bindParam(':descripcion', $descripcion);
-        $updateSQL->bindParam(':id_estado', $estado);
-        $updateSQL->bindParam(':id', $_GET['id']);
-        $updateSQL->execute();
-        echo '<script>alert("REGISTRO EXITOSO");</script>';
-        echo '<script>window.location="soli.php"</script>';
+        if ($respuesta=="")
+        {
+        echo '<script>alert ("EXISTEN DATOS VACIOS");</script>';
+    
+        }
+
+        else{
+         // Actualizar la solicitud
+        $insert = $con ->prepare("UPDATE solicitudes  SET id_estado = $id_estado WHERE id_soli= $identificador");
+        $insert ->execute();
+
+        $insertSQL = $con->prepare("INSERT INTO respuesta(id_soli, respuesta) VALUES ($identificador, '$respuesta')");
+        $insertSQL->execute();
+        echo '<script>alert("Respuesta cargada exitosamente");</script>';
+        echo '<script> window.close(); </script>';
     }
 }
 ?>
@@ -137,11 +130,10 @@ if (isset($_POST['responder'])) {
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="estado">Estado</label>
-                                <select class="form-control" name="estado">
-                                    <option value="1">Atendido</option>
-                                </select>
-                            </div>
+                                        <label for="documento">Responder</label>
+                                        <input type="text" name="respuesta" value="respuesta">
+                                    </div>
+                            
                         </div><!-- /.box-body -->
 
                         <div class="box-footer text-center">

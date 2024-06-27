@@ -32,6 +32,11 @@
                   <h3 class="box-title">No respondidas</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
+                <form method="post" action="funciones/nores_excel.php">
+                            <button type="submit" name="nores_excel" class="boton">
+                                <i class="fa fa-arrow-down"></i> Descargar reporte
+                            </button>
+                        </form>
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>

@@ -40,6 +40,13 @@
                 <div class="box-header">
                 <h3 class="box-title">Realizar solicitud</h3>
                   <a href="registro.php">aqui</a>
+                  <div class="box-header">
+                <form method="post" action="funciones/total_excel.php">
+                    <button type="submit" name="total_excel" class="boton">
+                        <i class="fa fa-arrow-down"></i> Descargar reporte
+                    </button>
+                </form>
+                
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>

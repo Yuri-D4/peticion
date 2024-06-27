@@ -91,117 +91,132 @@
 
   <main>
     
+  <div class="container">
+  <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
     <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
-      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+          <div class="col-12">
+            <a href="index.php" class="btn btn-primary w-100">Regresar</a>
+          </div>
 
-            <div class="col-12">
-                    <a href="index.php" class="btn btn-primary w-100">Regresar</a>
-                    </div>
+          <div class="d-flex justify-content-center py-4">
+            <a href="index.html" class="logo d-flex align-items-center w-auto">
+              <img src="assets/img/logo.png" alt="">
+              <span class="d-none d-lg-block">PetiFácil</span>
+            </a>
+          </div><!-- End Logo -->
 
-              <div class="d-flex justify-content-center py-4">
-                <a href="index.html" class="logo d-flex align-items-center w-auto">
-                  <img src="assets/img/logo.png" alt="">
-                  <span class="d-none d-lg-block">PetiFácil</span>
-                </a>
-              </div><!-- End Logo -->
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="pt-4 pb-2">
+                <h5 class="card-title text-center pb-0 fs-4">Crea una cuenta</h5>
+                <p class="text-center small">Ingresa tus datos para crear la cuenta</p>
+              </div>
 
-              <div class="card mb-3">
+              <form class="row g-3 needs-validation" method="POST" name="formreg" autocomplete="off" novalidate>
 
-                <div class="card-body">
-
-                  <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">Crea una cuenta</h5>
-                    <p class="text-center small">Ingresa tus datos para crear la cuenta</p>
+                <div class="col-12">
+                  <label for="cedula" class="form-label">Cédula</label>
+                  <div class="input-group has-validation">
+                    <input type="text" name="documento" class="form-control" pattern="[0-9]{8,12}" title="Solo se aceptan letras y números, entre 8 y 12 caracteres" id="cedula" required>
+                    <div class="invalid-feedback">Por favor, ingrese su cédula. Recuerde que solo se aceptan letras y números, entre 8 y 12 caracteres.</div>
                   </div>
-
-                  <form class="row g-3 needs-validation" method="POST" name="formreg" autocomplete="off" >
-
-                    <div class="col-12">
-                      <label for="yourUsername" class="form-label">Cedula</label>
-                      <div class="input-group has-validation">
-                        <input type="text" name="documento" class="form-control" pattern="[0-9]{5,15}" title="solo se aceptan números" id="cedula" >
-                        <div class="invalid-feedback">Por favor, ingrese su cedula, recuerde que solo se aceptan números.</div>
-                      </div>
-                    </div>
-
-                    <div class="col-12">
-                      <label for="yourName" class="form-label">Nombre</label>
-                      <input type="text" name="nombre" class="form-control" pattern="[A-Za-z/s]{1,40}" title="Solo se permiten letras" id="nombre" required>
-                      <div class="invalid-feedback">Por favor, ingrese su nombre!</div>
-                    </div>
-
-                    <div class="col-12">
-                      <label for="yourName" class="form-label">Apellido</label>
-                      <input type="text" name="apellido" class="form-control" pattern="[a-zA-Z/s]{1,40}" title="Solo se permiten letras" id="apellido" required>
-                      <div class="invalid-feedback">Por favor, ingrese su apellido!</div>
-                    </div>
-
-                    <div class="col-12">
-                      <label for="yourEmail" class="form-label">Correo</label>
-                      <input type="email" name="correo" class="form-control" id="correo" title="Ingrese su correo" required>
-                      <div class="invalid-feedback">Por favor, ingrese su correo!</div>
-                    </div>
-                      
-                    <div class="col-12">
-                      <label for="yourPassword" class="form-label">Contraseña</label>
-                      <input type="password" name="contrasena" class="form-control" pattern="[0-9]{1,10}" id="contrasena" title="Solo se aceptan 10 digitos alfanúmericos" required>
-                      <div class="invalid-feedback">Por favor, ingrese su contraseña, Recuerde que solo se aceptan 10 digitos alfanúmericos</div>
-                    </div>
-
-                    <div class="col-12">
-                      <label  for="tipo_user"></label>
-
-                      <?php   
-
-                      $query = $con -> prepare("SELECT * FROM tipo_user where id_tip_user = 2");
-                      $query -> execute ();
-                      $resultados = $query -> fetchAll(PDO::FETCH_ASSOC);
-
-                      foreach ($resultados as $fila1){
-                        ?>
-
-                     <input class="form-control" type="varchar" name="tipo_user" value="<?php echo $fila1['tipo_user']?>" readonly>
-                  
-
-                  <?php
-                          }
-                      ?>
-                     </div>
-
-                    <div class="col-12">
-                      <div class="form-check">
-                        <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
-                        <label class="form-check-label" for="acceptTerms">Estoy de acuerdo y acepto<a href="#">los términos de condiciones</a></label>
-                        <div class="invalid-feedback">Debes de aceptar antes de enviar</div>
-                      </div>
-                    </div>
-                    <div class="col-12">
-                      <input class="btn btn-primary w-100" name="registrar" value="Registrar" type="submit">
-                    </div>
-
-                    <div class="col-12">
-                      <p class="small mb-0">Ya tienes cuenta? <a href="inicio.php">Acceder</a></p>
-                    </div>
-                  </form>
-
                 </div>
-              </div>
 
-              <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-                <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
-              </div>
+                <div class="col-12">
+                  <label for="nombre" class="form-label">Nombre</label>
+                  <input type="text" name="nombre" class="form-control" pattern="[A-Za-z\s]{1,40}" title="Solo se permiten letras y espacios" id="nombre" required>
+                  <div class="invalid-feedback">Por favor, ingrese su nombre. Solo se permiten letras y espacios.</div>
+                </div>
+
+                <div class="col-12">
+                  <label for="apellido" class="form-label">Apellido</label>
+                  <input type="text" name="apellido" class="form-control" pattern="[A-Za-z\s]{1,40}" title="Solo se permiten letras y espacios" id="apellido" required>
+                  <div class="invalid-feedback">Por favor, ingrese su apellido. Solo se permiten letras y espacios.</div>
+                </div>
+
+                <div class="col-12">
+                  <label for="correo" class="form-label">Correo</label>
+                  <input type="email" name="correo" class="form-control" id="correo" title="Ingrese su correo" required>
+                  <div class="invalid-feedback">Por favor, ingrese su correo.</div>
+                </div>
+
+                <div class="col-12">
+                  <label for="contrasena" class="form-label">Contraseña</label>
+                  <input type="password" name="contrasena" class="form-control" pattern="[A-Za-z0-9]{10,11}" id="contrasena" title="Solo se aceptan hasta 10 caracteres alfanuméricos" required>
+                  <div class="invalid-feedback">Por favor, ingrese su contraseña. Solo se aceptan hasta 10 caracteres alfanuméricos.</div>
+                </div>
+
+                <div class="col-12">
+                  <label for="tipo_user" class="form-label"></label>
+                  <?php   
+                  $query = $con->prepare("SELECT * FROM tipo_user WHERE id_tip_user = 2");
+                  $query->execute();
+                  $resultados = $query->fetchAll(PDO::FETCH_ASSOC);
+                  foreach ($resultados as $fila1) {
+                  ?>
+                    <input class="form-control" type="text" name="tipo_user" value="<?php echo $fila1['tipo_user']?>" readonly>
+                  <?php
+                  }
+                  ?>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-check">
+                    <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
+                    <label class="form-check-label" for="acceptTerms">Estoy de acuerdo y acepto <a href="#">los términos de condiciones</a></label>
+                    <div class="invalid-feedback">Debes aceptar los términos antes de enviar.</div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <input class="btn btn-primary w-100" name="registrar" value="Registrar" type="submit">
+                </div>
+
+                <div class="col-12">
+                  <p class="small mb-0">¿Ya tienes cuenta? <a href="inicio.php">Acceder</a></p>
+                </div>
+              </form>
 
             </div>
           </div>
+
+          <div class="credits">
+            <!-- All the links in the footer should remain intact. -->
+            <!-- You can delete the links only if you purchased the pro version. -->
+            <!-- Licensing information: https://bootstrapmade.com/license/ -->
+            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+            <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
+          </div>
+
         </div>
+      </div>
+    </div>
+</div>
+
+<script>
+  // Ejemplo de JavaScript para deshabilitar el envío del formulario si hay campos no válidos
+  (function () {
+    'use strict'
+
+    // Obtener todos los formularios a los que queremos aplicar estilos de validación personalizados
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // Bucle sobre ellos y evitar el envío
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+</script>
 
       </section>
 

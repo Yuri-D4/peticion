@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-05-2024 a las 18:38:44
--- Versión del servidor: 10.4.27-MariaDB
--- Versión de PHP: 8.2.0
+-- Tiempo de generación: 27-06-2024 a las 06:31:17
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -43,24 +43,29 @@ INSERT INTO `estado` (`id_estado`, `nom_estado`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `respuesta`
+--
+
+CREATE TABLE `respuesta` (
+  `id_respuesta` int(11) NOT NULL,
+  `id_soli` int(11) NOT NULL,
+  `respuesta` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `solicitudes`
 --
 
 CREATE TABLE `solicitudes` (
   `id_soli` int(11) NOT NULL,
-  `cedula` bigint(11) NOT NULL,
+  `documento` bigint(11) NOT NULL,
   `id_tip_soli` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `descripcion` varchar(100) NOT NULL,
   `id_estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `solicitudes`
---
-
-INSERT INTO `solicitudes` (`id_soli`, `cedula`, `id_tip_soli`, `fecha`, `descripcion`, `id_estado`) VALUES
-(1, 1111333014, 1, '2024-05-15', 'La aprendiz consiguió un empleo en jornada contraria y por lo cual necesita el espacio', 1);
 
 -- --------------------------------------------------------
 
@@ -78,8 +83,8 @@ CREATE TABLE `tipo_solicitud` (
 --
 
 INSERT INTO `tipo_solicitud` (`id_tip_soli`, `tipo_soli`) VALUES
-(1, 'Cambio de jornada'),
-(2, 'Retiro Voluntario');
+(2, 'Retiro Voluntario'),
+(3, 'Solicitud de reunión');
 
 -- --------------------------------------------------------
 
@@ -120,7 +125,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`documento`, `nombre`, `apellido`, `correo`, `contrasena`, `id_tip_user`) VALUES
-(1111333014, 'Yurica', 'Ducuara', 'yuriducu04@gmail.com', '$2y$10$nQENLkF30lfxV48WAdtGiuQLGqcd6UGKlOqkYzVyTvfJauInjEv5G', 2);
+(1111333456, 'Sebastian', 'Plazas', 'sebas@gmail.com', '$2y$10$hxqNn1zeWK1bkofg8Zdx..AzUrWErpH6lzCXPRJ.MIfOHufMpcyJu', 1);
 
 --
 -- Índices para tablas volcadas
@@ -131,6 +136,12 @@ INSERT INTO `usuarios` (`documento`, `nombre`, `apellido`, `correo`, `contrasena
 --
 ALTER TABLE `estado`
   ADD PRIMARY KEY (`id_estado`);
+
+--
+-- Indices de la tabla `respuesta`
+--
+ALTER TABLE `respuesta`
+  ADD PRIMARY KEY (`id_respuesta`);
 
 --
 -- Indices de la tabla `solicitudes`
@@ -167,22 +178,28 @@ ALTER TABLE `estado`
   MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT de la tabla `respuesta`
+--
+ALTER TABLE `respuesta`
+  MODIFY `id_respuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT de la tabla `solicitudes`
 --
 ALTER TABLE `solicitudes`
-  MODIFY `id_soli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_soli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_solicitud`
 --
 ALTER TABLE `tipo_solicitud`
-  MODIFY `id_tip_soli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_tip_soli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_user`
 --
 ALTER TABLE `tipo_user`
-  MODIFY `id_tip_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_tip_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

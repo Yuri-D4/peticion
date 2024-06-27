@@ -32,7 +32,7 @@ if (isset($_POST["inicio"])) {
          } 
    
         }else {
-            header("location: ../model/administrador/inicio/error.php");
+            header("location: inicio.php");
             exit();
         }
     }

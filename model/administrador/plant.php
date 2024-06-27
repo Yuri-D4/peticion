@@ -5,14 +5,11 @@
      $con = $db -> conectar();
 
    
-  $documento= $_SESSION['documento'];
-
-  // if (!isset($documento)){
-  //   //include("../../../controller/validar_licencia.php");
-  //   echo '<script>No has iniciado sesion</script>';
-  //   header("Location: ../inicio/login.php");
-  //   }
-  
+     $documento= $_SESSION['documento'];
+     if (!isset($_SESSION['documento'])) {
+       header("Location: ../../index.php");
+       exit;
+     }
   $con_nombre = $con->prepare("SELECT * FROM usuarios WHERE documento = '$documento'");
   $con_nombre->execute();
   $nombre = $con_nombre->fetchAll(PDO::FETCH_ASSOC);

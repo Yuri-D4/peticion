@@ -3,7 +3,6 @@
     require_once ("db/connection.php");
     //include("../../../controller/validar_licencia.php");
  
-    
 ?>
 
 <!DOCTYPE html>
@@ -49,72 +48,90 @@
 <body>
 
   <main>
+  <div class="container">
+  <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
     <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
-      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+          <div class="col-12">
+            <a href="index.php" class="btn btn-primary w-100">Regresar</a>
+          </div>
 
-            <div class="col-12">
-                    <a href="index.php" class="btn btn-primary w-100">Regresar</a>
-                    </div>
+          <div class="d-flex justify-content-center py-4">
+            <a href="index.html" class="logo d-flex align-items-center w-auto">
+              <img src="assets/img/logo.png" alt="">
+              <span class="d-none d-lg-block">PetiFácil</span>
+            </a>
+          </div><!-- End Logo -->
 
-              <div class="d-flex justify-content-center py-4">
-                <a href="index.html" class="logo d-flex align-items-center w-auto">
-                  <img src="assets/img/logo.png" alt="">
-                  <span class="d-none d-lg-block">PetiFácil</span>
-                </a>
-              </div><!-- End Logo -->
-
-              <div class="card mb-3">
-
-                <div class="card-body">
-
-                  <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">Iniciar Sesión</h5>
-                    <p class="text-center small">Ingresar con Username y Contraseña</p>
-                  </div>
-
-                  <form class="row g-3 needs-validation" method="POST" name="formreg" action="controller/inicio.php" autocomplete="off" >
-
-                    <div class="col-12">
-                      <label for="yourUsername" class="form-label">Cedula</label>
-                      <div class="input-group has-validation">
-                        <!-- <span class="input-group-text" id="inputGroupPrepend">@</span> -->
-                        <input type="number" name="documento" class="form-control" id="cedula" required>
-                        <div class="invalid-feedback">Por favor ingrese su usuario</div>
-                      </div>
-                    </div>
-
-                    <div class="col-12">
-                      <label for="yourPassword" class="form-label">Contraseña</label>
-                      <input type="password" name="contrasena" class="form-control" id="contrasena" required>
-                      <div class="invalid-feedback">Por favor ingrese su contraseña</div>
-                    </div>
-
-                    <div class="col-12">
-                      <div class="form-check">
-                        <!-- <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
-                        <label class="form-check-label" for="rememberMe">Remember me</label> -->
-                      </div>
-                    </div>
-                    <div class="col-12">
-                      <input class="btn btn-primary w-100" name="inicio" value="Acceder" type="submit">
-                    </div>
-                    <div class="col-12">
-                      <p class="small mb-0">No tienes cuenta? <a href="registro.php">Crea una cuenta</a></p>
-                    </div>
-                  </form>
-
-                </div>
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="pt-4 pb-2">
+                <h5 class="card-title text-center pb-0 fs-4">Iniciar Sesión</h5>
+                <p class="text-center small">Ingresar con Username y Contraseña</p>
               </div>
 
-            
+              <form class="row g-3 needs-validation" method="POST" name="formreg" action="controller/inicio.php" autocomplete="off" novalidate>
 
+                <div class="col-12">
+                  <label for="cedula" class="form-label">Cédula</label>
+                  <div class="input-group has-validation">
+                    <input type="text" name="documento" class="form-control" id="cedula" pattern="[0-9]{8,12}" title="Solo se aceptan números, entre 8 y 12 caracteres" required>
+                    <div class="invalid-feedback">Por favor ingrese su cédula. Solo se aceptan números, entre 8 y 12 caracteres.</div>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <label for="contrasena" class="form-label">Contraseña</label>
+                  <input type="password" name="contrasena" class="form-control" pattern="[A-Za-z0-9]{10,11}" id="contrasena" title="Solo se aceptan hasta 10 caracteres alfanuméricos" required>
+                  <div class="invalid-feedback">Por favor, ingrese su contraseña. Solo se aceptan hasta 10 caracteres alfanuméricos.</div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-check">
+                    <!-- Puedes agregar una casilla de verificación aquí si es necesario -->
+                  </div>
+                </div>
+                
+                <div class="col-12">
+                  <input class="btn btn-primary w-100" name="inicio" value="Acceder" type="submit">
+                </div>
+
+                <div class="col-12">
+                  <p class="small mb-0">¿No tienes cuenta? <a href="registro.php">Crea una cuenta</a></p>
+                </div>
+              </form>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  // Ejemplo de JavaScript para deshabilitar el envío del formulario si hay campos no válidos
+  (function () {
+    'use strict'
+
+    // Obtener todos los formularios a los que queremos aplicar estilos de validación personalizados
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // Bucle sobre ellos y evitar el envío
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+</script>
 
       </section>
 
